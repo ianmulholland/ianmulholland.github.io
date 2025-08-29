@@ -1,451 +1,567 @@
 <!DOCTYPE HTML>
 <!--
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    Strata by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<link rel="icon" href="avatar.jpg">
-		<title>Hey, I'm Ian</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="main.css" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-	</head>
-	<body class="is-preload">
+    <head>
+        <link rel="icon" href="avatar.jpg">
+        <title>Hey, I'm Ian</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+        <style>
+        /* Connections Widget Styles */
+        .work-item img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          object-fit: contain;
+          aspect-ratio: 4 / 3; /* or try 1 / 1 for square, 3 / 2 for taller layout */
+      }
+        .connections-widget {
+          max-width: 600px;
+          margin: 2em auto 2em auto;
+          padding: 2em 1em 1.5em 1em;
+          background: #fff;
+          border: 1.5px solid #e0e7ef;
+          border-radius: 18px;
+          box-shadow: 0 4px 24px #0001;
+          color: #232323;
+          text-align: center;
+          animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;
+          font-family: Helvetica, Arial, sans-serif;
+        }
+        .connections-title {
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: #49bf9d;
+          margin-bottom: 1em;
+          letter-spacing: 1px;
+        }
+        .connections-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 120px);
+          grid-template-rows: repeat(4, 70px);
+          gap: 0.7em;
+          justify-content: center;
+          margin-bottom: 1.2em;
+        }
+        .connections-box {
+          background: #f5f8fa;
+          border: 2px solid #49bf9d;
+          border-radius: 10px;
+          font-size: 1rem;
+          font-weight: 600;
+          color: #232323;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+          user-select: none;
+          box-shadow: 0 2px 8px #0001;
+          position: relative;
+          padding: 0.5em;
+          text-align: center;
+          word-break: break-word;
+          height: 70px;
+          width: 120px;
+          box-sizing: border-box;
+          margin: 0;
+        }
+        .connections-box.selected {
+          background: #e3f2fd;
+          border-color: #ff9800;
+          color: #49bf9d;
+          z-index: 1;
+        }
+        .connections-box.solved {
+          background: #e6f7e6;
+          border-color: #43a047;
+          color: #388e3c;
+          cursor: default;
+        }
+        .connections-box.shake {
+          animation: shake 0.4s;
+        }
+        @keyframes shake {
+          10%, 90% { transform: translateX(-2px); }
+          20%, 80% { transform: translateX(4px); }
+          30%, 50%, 70% { transform: translateX(-8px); }
+          40%, 60% { transform: translateX(8px); }
+        }
+        .connections-group {
+          display: flex;
+          justify-content: center;
+          gap: 0.7em;
+          margin-bottom: 0.7em;
+        }
+        .connections-group-label {
+          width: 100%;
+          text-align: center;
+          font-size: 1rem;
+          color: #1976d2;
+          font-weight: 600;
+          margin-bottom: 0.3em;
+          margin-top: 0.2em;
+        }
+        .connections-message {
+          font-size: 1rem;
+          color: #388e3c;
+          margin-bottom: 0.7em;
+          min-height: 1.2em;
+        }
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="#" class="image avatar"><img src="avatar.jpg" alt="" /></a>
-					<h1><strong>Hey, I'm Ian</strong>. I build teams, technology,<br />
-					and tools for transformational impact and sustainable growth.<br />
-					</h1>
-					<ul class="icons">
-						<li><a href="https://www.linkedin.com/in/ianmulholland/" class="icon brands fa-linkedin" target="_blank" ><span class="label">LinkedIn</span></a></li>
-						<li><a href="RESUME-index.html" class="icon fa-file"target="_blank"><span class="label">Resume</span></a></li>
-						<li><a href="https://medium.com/@ian.mulholland" class="icon brands fa-medium" target="_blank"><span class="label">Medium</span></a></li>
-						<li><a href="https://falcon-street.super.site/" class="icon brands fa-hand"target="_blank"><span class="label">Dribbble</span></a></li>
-						<li><a href="https://github.com/ianmulholland" class="icon brands fa-github"target="_blank"><span class="label">Github</span></a></li>
-						<li><a href="https://dribbble.com/ianmulholland" class="icon brands fa-dribbble"target="_blank"><span class="label">Dribbble</span></a></li>
-					</ul>
-				</div>
-			</header>
+        /* "I am..." ticker styles */
+        #iam-header {
+          display: flex;
+          align-items: baseline;
+          font-size: 2rem;
+          color: #49bf9d;
+          font-weight: 700;
+          margin: 1em 0 0.5em 0;
+        }
+        .iam-static {
+          font-weight: 700;
+		  color: #787878;
 
-		<!-- Main -->
-			<div id="main">
+        }
+        #iam-role {
+          color: #49bf9d;
+          font-weight: bold;
+          white-space: pre;
+          display: inline-block;
+          transition: opacity 0.3s;
+          min-width: 24ch;
+        }
 
-				<!-- One -->
-					<section id="one">
-						<header class="major">
-							<h2>Hey, I'm Ian. <br>
-								It's nice to meet you.
-							</br></h2>
-						</header>
-						<p>I design strategies, implement projects, and build solutions for social impact entrepreneurs, NGOs, and grassroots organizations. 
-							I specialize in driving growth and deepening impact through  data management and analysis, internal capacity-building, social innovation design, and privacy and cybersecurity.   
+        /* Project grid styles (no box) */
+        .section-title {
+          font-size: 1.7rem;
+          font-weight: 700;
+          color: #49bf9d;
+          margin: 2em 0 0.4em 0;
+          text-align: center;
+          position: relative;
+          letter-spacing: 0.5px;
+        }
+        .section-title::after {
+          content: '';
+          display: block;
+          width: 60px;
+          height: 3px;
+          background: #ff9800;
+          margin: 0.4em auto 0;
+          border-radius: 1px;
+        }
+        .highlight {
+          font-size: 1.13rem;
+          font-weight: 600;
+          color: #ff9800;
+          text-align: center;
+          margin: 1.2em 0 0.4em 0;
+        }
+        .project-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr); /* 2 columns */
+			gap: 2em;
+			margin-top: 1.5em;
+			margin-bottom: 2em;
+			justify-items: center;
+			align-items: center;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			}
 
-						<br>
-						</br>
-						<b>
-						Over the last 10 years, I've worked on a number of projects and teams that solve complex problems at local level and a global scale. I've been a part of a variety of projects and teams, such as improving the cybersecurity infrastructure of a human rights archive in Yemen and Syria; designing and launching a community advocacy solution in Peru; creating Connecticut's first digital tool to understand policy issues for people facing homelessness; and many others.
+        .project-box {
+			text-align: center;
+			font-size: 1.15rem;
+			font-weight: 600;
+			color: #232323;
+			transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-height: 180px;
+			padding: 1.2em;
+			cursor: pointer;
+			user-select: none;
+		}
+        .project-box:hover {
+          transform: translateY(-4px) scale(1.03);
+        }
+        .project-img {
+          width: 160px;
+          height: 160px;
+          object-fit: contain;
+          display: block;
+          margin: 0 auto 0.5em auto;
+          border-radius: 12px;
+          background: #f8f7f2;
+          pointer-events: none;
+        }
+        </style>
+    </head>
+    <body class="is-preload">
 
-						</br>
-						<br>
-							I am a graduate of <a href="https://www.ischool.berkeley.edu/" target="_blank">Berkeley's School of Information Masters of Information Management Systems program</a>.  
-							I received a graduate certificate in <a href="https://www.ischool.berkeley.edu/programs/ictd" target="_blank">Information and Communication Technology for Development (ICTD)</a> 
-							and I am an inaugral member of the <a href="https://developmentengineering.berkeley.edu/programs/dtod/about/" target="_blank">Digital Transformation of Development (DToD) Fellowship</a>, an NSF Research Traineeship (NRT) Program. 
-							I am also proud graduate from The Ohio State University with degrees in International Development, Economics, and French, 
-							and continue to support the <a href="https://blf.osu.edu/" target="_blank">Buckeye Leadership Fellows</a>.
-						</br>
-						</p>
-						<ul class="actions">
-							<li><a href="RESUME-index.html" target="_blank" class="button">Learn more about my journey</a></li>
-						</ul>
-					</section>
+        <!-- Header -->
+            <header id="header">
+                <div class="inner">
+                    <a href="#" class="image avatar"><img src="avatar.jpg" alt="" /></a>
+                    <h1><strong>Hey, I'm Ian</strong>. I build teams, technology,<br />
+                    and tools for transformational impact and sustainable growth.<br />
+                    </h1>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/ianmulholland/" class="icon brands fa-linkedin" target="_blank" ><span class="label">LinkedIn</span></a></li>
+                        <li><a href="RESUME-index.html" class="icon fa-file"target="_blank"><span class="label">Resume</span></a></li>
+                        <li><a href="https://github.com/ianmulholland" class="icon brands fa-github"target="_blank"><span class="label">Github</span></a></li>
+                    </ul>
+                </div>
+            </header>
 
-				<!-- Two -->
-					<section id="two">
-						<h2>Recent Work</h2>
-						<div class="row">
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://social-impact-toolkit.super.site/" target="_blank"> <img src="toolkit.jpg" alt="" /> </a>	
-								<h3><a href="https://social-impact-toolkit.super.site/" target="_blank">Technology for Social Impact Toolkit</a></h3>
-								<p>An open source resource for anyone working in technology and social impact.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/accelerating-indigenous-activism-in-peru-11708ed94606" target="_blank"> <img src="ind-peru.jpg" alt="" /> </a>	
-								<h3><a href="https://medium.com/@ian.mulholland/accelerating-indigenous-activism-in-peru-11708ed94606" target="_blank">Accelerating Indigenous Advocacy in Peru</a></h3>
-								<p>I built the initial design and community-organizing strategy for a start-up in Peru supporting Indigenous advocacy.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/improving-the-cybersecurity-of-human-rights-76b409d1d3bb" target="_blank"> <img src="syria.jpg" alt="" /> </a>	
-								<h3><a href="https://medium.com/@ian.mulholland/improving-the-cybersecurity-of-human-rights-76b409d1d3bb" target="_blank">Improving Cybersecurity for a Human Rights Archive</a></h3>
-								<p>I worked with a human rights digital archive working in several conflict regions, including Syria, Yemen, and Sudan to build a strong cybersecurity infrastructure against attacks.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/community-led-impact-and-evaluation-in-india-f52c6f2ad364" target="_blank"> <img src="sewa.jpg" alt="" /> </a>	
-								<h3><a href="https://medium.com/@ian.mulholland/community-led-impact-and-evaluation-in-india-f52c6f2ad364" target="_blank">Community-led Impact and Evaluation in India</a></h3>
-								<p>I worked with community organizers in India to develop an inferential impact measurement tool.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/combatting-homelessness-through-data-3cdcf2140467" target="_blank"> <img src="housing.jpg" alt="" /> </a>	
-								<h3><a href="https://medium.com/@ian.mulholland/combatting-homelessness-through-data-3cdcf2140467" target="_blank">Combatting Homelessness Through Data Driven Policy</a></h3>
-								<p>I created a tool that supported housing collective advocacy efforts to reduce homelessness.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/democratizing-resources-for-impact-entrepreneurs-6408f7e01df7" target="_blank"> <img src="partnership.jpg" alt="" /> </a>	
-								<h3><a href="https://medium.com/@ian.mulholland/democratizing-resources-for-impact-entrepreneurs-6408f7e01df7" target="_blank">Democratizing Resources for Impact Entrepreneurs</a></h3>
-								<p>I developed recommender tools to improve partnership making between donors and social impact entrepreneurs.</p>
-							</article>
-						</div>
-						<!--  
-						<ul class="actions">
-							<li><a href="https://falcon-street.super.site/portfolio" class="button">Full Portfolio</a></li>
-						</ul> -->
-					</section>
+        <!-- Main -->
+            <div id="main">
 
-				<!-- Four 
+                <!-- One -->
+                    <section id="one">
+                        <header class="major">
+                            <h2>Hey, I'm Ian. <br>
+                                It's nice to meet you.
+                            </br></h2>
+                        </header>
+							<p>
+							I design strategies, implement projects, and build solutions for social impact organizations, nonprofits, and grassroots organizations. 
+                            I specialize in driving growth and deepening impact through  data management and analysis, internal capacity-building, social innovation design, and privacy and cybersecurity.   
+							</p>
+							
+							<p>
+							I currently <span style="color:#49bf9d; font-weight:bold;">train surgeons 🩺</span> across Africa and Asia and
+							<span style="color:#49bf9d; font-weight:bold;">teach machine learning at MIT 🤖</span> to learners from conflict zones across the world.
+							</p>
 
-					<section id="four">
-						<h2>Elements</h2>
+							But more importantly,
+                        <!-- "I am..." ticker -->
+                        <div id="iam-header">
+                          <span class="iam-static">I'm&nbsp;</span><span id="iam-role"></span>
+                        </div>
+                        <ul class="actions">
+                            <li><a href="RESUME-index.html" target="_blank" class="button">Here's my Resume</a></li>
+                        </ul>
+                    </section>
 
-						<section>
-							<h4>Text</h4>
-							<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-							This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-							This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-							<hr />
-							<header>
-								<h4>Heading with a Subtitle</h4>
-								<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-							</header>
-							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-							<header>
-								<h5>Heading with a Subtitle</h5>
-								<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-							</header>
-							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-							<hr />
-							<h2>Heading Level 2</h2>
-							<h3>Heading Level 3</h3>
-							<h4>Heading Level 4</h4>
-							<h5>Heading Level 5</h5>
-							<h6>Heading Level 6</h6>
-							<hr />
-							<h5>Blockquote</h5>
-							<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-							<h5>Preformatted</h5>
-							<pre><code>i = 0;
+                <!-- 1.5 -->
+                    <section id="one-point-five">
+                    <h2>About Me</h2>
+                        <p>
+                        Over the last 10 years, I've worked on a number of projects and teams that solve complex problems at local level and a global scale. I've been a part of a variety of projects and teams, such as improving the cybersecurity infrastructure of a human rights archive in Yemen and Syria; designing and launching a community advocacy solution in Peru; creating Connecticut's first digital tool to understand policy issues for people facing homelessness; and many others.
+                        
+                        </p>
+                        <p>
+                          I got my start helping organizations use technology and data to better support their communities, which eventually took me to <a href="hhttps://www.sewa.org/" target="_blank">SEWA</a>  in India, where I helped lead their Digital Initiatives program. We worked to expand access to social security and digital literacy for thousands of women. That experience got me thinking bigger about systems-level change, which led me to MIT, where I built the impact evaluation team at <a href="https://solve.mit.edu/" target="_blank">MIT Solve</a>. Since then, I’ve focused more on career readiness and healthcare by designing the $17 million Catalyze Challenge, supporting mentoring programs like <a href="https://conexion-all.org/" target="_blank">Conexión</a> in Boston, and now working at <a href="https://www.self.surgery" target="_blank">SELF</a>, where I help train surgeons and nurses in low-resource settings with practical, procedure-based education. I also teach displaced students through <a href="https://emergingtalent.mit.edu/" target="_blank">MIT Emerging Talent</a>, helping them build skills and confidence to pursue meaningful careers in tech and science.
+                        
+                        </p>
+                        <p>
+                            I am a graduate of <a href="https://www.ischool.berkeley.edu/" target="_blank">Berkeley's School of Information Masters of Information Management Systems program</a>.  
+                            I received a graduate certificate in <a href="https://www.ischool.berkeley.edu/programs/ictd" target="_blank">Information and Communication Technology for Development (ICTD)</a> 
+                            and I am an inaugral member of the <a href="https://developmentengineering.berkeley.edu/programs/dtod/about/" target="_blank">Digital Transformation of Development (DToD) Fellowship</a>, an NSF Research Traineeship (NRT) Program. 
+                            I am also proud graduate from The Ohio State University with degrees in International Development, Economics, and French.
+                        </p>
+                    </section>
 
-while (!deck.isInOrder()) {
-print 'Iteration ' + i;
-deck.shuffle();
-i++;
-}
+                <!-- Connections Game Widget -->
+                <section id="connections-section">
+                  <div class="connections-widget">
+                    <div class="connections-title">About Me Connections</div>
+                    <div>Every morning I start my day with an iced coffee and a game of Connections.</div>
+                    <div id="connections-message" class="connections-message"></div>
+                    <div id="connections-groups"></div>
+                    <div id="connections-grid" class="connections-grid"></div>
+                  </div>
+                </section>
+                <!-- End Connections Game Widget -->
 
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-						</section>
+                <!-- 1.9 -->
+                <section id="one-point-nine">
+                <h2>Current Work</h2>
+                <div class="project-grid">
+                  <div class="project-box" onclick="window.open('https://play.google.com/store/apps/details?id=com.intuitive.selfpeerreview&hl=en_US', '_blank')">
+                    <img src="app-logo.png" alt="SELF Peer Review App Logo" class="project-img">
+                    SELF Peer Review App
+                  </div>
+                  <div class="project-box" onclick="window.open('https://tissues.softr.app/', '_blank')">
+                    <img src="tissues.png" alt="Tissues Database Logo" class="project-img">
+                    Tissues Database
+                  </div>
+                  <div class="project-box" onclick="window.open('https://www.maine-atlas.com/', '_blank')">
+                    <img src="atlas-logo.png" alt="Atlas Logo" class="project-img">
+                    Atlas
+                  </div>
+                  <div class="project-box" onclick="window.open('https://emergingtalent.mit.edu/', '_blank')">
+                    <img src="102182112.png" alt="Placeholder Logo" class="project-img">
+                    MIT Emerging Talent
+                  </div>
+                </div>
+                </section>
 
-						<section>
-							<h4>Lists</h4>
-							<div class="row">
-								<div class="col-6 col-12-xsmall">
-									<h5>Unordered</h5>
-									<ul>
-										<li>Dolor pulvinar etiam magna etiam.</li>
-										<li>Sagittis adipiscing lorem eleifend.</li>
-										<li>Felis enim feugiat dolore viverra.</li>
-									</ul>
-									<h5>Alternate</h5>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam magna etiam.</li>
-										<li>Sagittis adipiscing lorem eleifend.</li>
-										<li>Felis enim feugiat dolore viverra.</li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-xsmall">
-									<h5>Ordered</h5>
-									<ol>
-										<li>Dolor pulvinar etiam magna etiam.</li>
-										<li>Etiam vel felis at lorem sed viverra.</li>
-										<li>Felis enim feugiat dolore viverra.</li>
-										<li>Dolor pulvinar etiam magna etiam.</li>
-										<li>Etiam vel felis at lorem sed viverra.</li>
-										<li>Felis enim feugiat dolore viverra.</li>
-									</ol>
-									<h5>Icons</h5>
-									<ul class="icons">
-										<li><a href="https://www.linkedin.com/in/ianmulholland/"  class="icon brands fa-linkedin" target="_blank" ><span class="label">LinkedIn</span></a></li>
-										<li><a href="https://medium.com/@ian.mulholland" class="icon brands fa-medium"><span class="label">Medium</span></a></li>
-										<li><a href="https://simonsmith.github.io/github-user-search/#/ianmulholland" class="icon brands fa-github"><span class="label">Github</span></a></li>
-										<li><a href="https://dribbble.com/ianmulholland" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-									</ul>
-								</div>
-							</div>
-							<h5>Actions</h5>
-							<ul class="actions">
-								<li><a href="#" class="button primary">Default</a></li>
-								<li><a href="#" class="button">Default</a></li>
-							</ul>
-							<ul class="actions small">
-								<li><a href="#" class="button primary small">Small</a></li>
-								<li><a href="#" class="button small">Small</a></li>
-							</ul>
-							<div class="row">
-								<div class="col-6 col-12-small">
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-small">
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary small">Small</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-small">
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary fit">Default</a></li>
-										<li><a href="#" class="button fit">Default</a></li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-small">
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary small fit">Small</a></li>
-										<li><a href="#" class="button small fit">Small</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
+                <!-- Two -->
+                    <section id="two">
+                        <h2>Past Work</h2>
+                        <div class="row">
+                            <article class="col-6 col-12-xsmall work-item">
+                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://www.catalyzechallenge.org/" target="_blank"> <img src="stemed.jpg" alt="" /> </a>    
+                                <h3><a href="https://www.catalyzechallenge.org/" target="_blank">Strenghtening Career Pathways</a></h3>
+                                <p>I led the design of a $17 million grant program that found solutions for students in middle and high school chart clear, fulfilling paths from classroom to career.</p>
+                            </article>
+                            <article class="col-6 col-12-xsmall work-item">
+                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://200millionartisans.org/" target="_blank"> <img src="indiacraft.jpg" alt="" /> </a>    
+                                <h3><a href="https://200millionartisans.org/" target="_blank">Driving Innovation in Traditional Craft</a></h3>
+                                <p>I created India's first innovation competition in the craft sector, Kula Innovate.</p>
+                            </article>
+                            <article class="col-6 col-12-xsmall work-item">
+                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://social-impact-toolkit.super.site/" target="_blank"> <img src="toolkit.jpg" alt="" /> </a>    
+                                <h3><a href="https://social-impact-toolkit.super.site/" target="_blank">Technology for Social Impact Toolkit</a></h3>
+                                <p>An open source resource for anyone working in technology and social impact.</p>
+                            </article>
+                            <article class="col-6 col-12-xsmall work-item">
+                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/accelerating-indigenous-activism-in-peru-11708ed94606" target="_blank"> <img src="ind-peru.jpg" alt="" /> </a>    
+                                <h3><a href="https://medium.com/@ian.mulholland/accelerating-indigenous-activism-in-peru-11708ed94606" target="_blank">Accelerating Indigenous Advocacy in Peru</a></h3>
+                                <p>I built the initial design and community-organizing strategy for a start-up in Peru supporting Indigenous advocacy.</p>
+                            </article>
+                            <article class="col-6 col-12-xsmall work-item">
+                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/improving-the-cybersecurity-of-human-rights-76b409d1d3bb" target="_blank"> <img src="syria.jpg" alt="" /> </a>    
+                                <h3><a href="https://medium.com/@ian.mulholland/improving-the-cybersecurity-of-human-rights-76b409d1d3bb" target="_blank">Improving Cybersecurity for a Human Rights Archive</a></h3>
+                                <p>I worked with a human rights digital archive working in several conflict regions, including Syria, Yemen, and Sudan to build a strong cybersecurity infrastructure against attacks.</p>
+                            </article>
+                            <article class="col-6 col-12-xsmall work-item">
+                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/community-led-impact-and-evaluation-in-india-f52c6f2ad364" target="_blank"> <img src="sewa.jpg" alt="" /> </a>    
+                                <h3><a href="https://medium.com/@ian.mulholland/community-led-impact-and-evaluation-in-india-f52c6f2ad364" target="_blank">Community-led Impact and Evaluation in India</a></h3>
+                                <p>I worked with community organizers in India to develop an inferential impact measurement tool.</p>
+                            </article>
+                            <article class="col-6 col-12-xsmall work-item">
+                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/combatting-homelessness-through-data-3cdcf2140467" target="_blank"> <img src="housing.jpg" alt="" /> </a>    
+                                <h3><a href="https://medium.com/@ian.mulholland/combatting-homelessness-through-data-3cdcf2140467" target="_blank">Combatting Homelessness Through Data Driven Policy</a></h3>
+                                <p>I created a tool that supported housing collective advocacy efforts to reduce homelessness.</p>
+                            </article>
+                            <article class="col-6 col-12-xsmall work-item">
+                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/democratizing-resources-for-impact-entrepreneurs-6408f7e01df7" target="_blank"> <img src="partnership.jpg" alt="" /> </a>    
+                                <h3><a href="https://medium.com/@ian.mulholland/democratizing-resources-for-impact-entrepreneurs-6408f7e01df7" target="_blank">Democratizing Resources for Impact Entrepreneurs</a></h3>
+                                <p>I developed recommender tools to improve partnership making between donors and social impact entrepreneurs.</p>
+                            </article>
+                        </div>
+                    </section>
 
-						<section>
-							<h4>Table</h4>
-							<h5>Default</h5>
-							<div class="table-wrapper">
-								<table>
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Description</th>
-											<th>Price</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Item One</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Two</td>
-											<td>Vis ac commodo adipiscing arcu aliquet.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Three</td>
-											<td> Morbi faucibus arcu accumsan lorem.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Four</td>
-											<td>Vitae integer tempus condimentum.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Five</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="2"></td>
-											<td>100.00</td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
+            </div>
 
-							<h5>Alternate</h5>
-							<div class="table-wrapper">
-								<table class="alt">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Description</th>
-											<th>Price</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Item One</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Two</td>
-											<td>Vis ac commodo adipiscing arcu aliquet.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Three</td>
-											<td> Morbi faucibus arcu accumsan lorem.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Four</td>
-											<td>Vitae integer tempus condimentum.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Five</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="2"></td>
-											<td>100.00</td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						</section>
+        <!-- Footer -->
+            <footer id="footer">
+                <div class="inner">
+                    <ul class="icons">
+                        <!--- <li><a href="https://www.linkedin.com/in/ianmulholland/" class="icon brands fa-linkedin" target="_blank" ><span class="label">LinkedIn</span></a></li>
+                        <li><a href="https://medium.com/@ian.mulholland" class="icon brands fa-medium"><span class="label">Medium</span></a></li>
+                        <li><a href="https://simonsmith.github.io/github-user-search/#/ianmulholland" class="icon brands fa-github"><span class="label">Github</span></a></li>
+                        <li><a href="https://dribbble.com/ianmulholland" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li> --->
+                    </ul> 
+                    <ul class="copyright">
+                        <li>&copy; Ian Mulholland</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                    </ul>
+                </div>
+            </footer>
 
-						<section>
-							<h4>Buttons</h4>
-							<ul class="actions">
-								<li><a href="#" class="button primary">Primary</a></li>
-								<li><a href="#" class="button">Default</a></li>
-							</ul>
-							<ul class="actions">
-								<li><a href="#" class="button large">Large</a></li>
-								<li><a href="#" class="button">Default</a></li>
-								<li><a href="#" class="button small">Small</a></li>
-							</ul>
-							<ul class="actions fit">
-								<li><a href="#" class="button primary fit">Fit</a></li>
-								<li><a href="#" class="button fit">Fit</a></li>
-							</ul>
-							<ul class="actions fit small">
-								<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-								<li><a href="#" class="button fit small">Fit + Small</a></li>
-							</ul>
-							<ul class="actions">
-								<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-								<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-							</ul>
-							<ul class="actions">
-								<li><span class="button primary disabled">Primary</span></li>
-								<li><span class="button disabled">Default</span></li>
-							</ul>
-						</section>
+        <!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.poptrox.min.js"></script>
+            <script src="assets/js/browser.min.js"></script>
+            <script src="assets/js/breakpoints.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
 
-						<section>
-							<h4>Form</h4>
-							<form method="post" action="#">
-								<div class="row gtr-uniform gtr-50">
-									<div class="col-6 col-12-xsmall">
-										<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-									</div>
-									<div class="col-6 col-12-xsmall">
-										<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-									</div>
-									<div class="col-12">
-										<select name="demo-category" id="demo-category">
-											<option value="">- Category -</option>
-											<option value="1">Manufacturing</option>
-											<option value="1">Shipping</option>
-											<option value="1">Administration</option>
-											<option value="1">Human Resources</option>
-										</select>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-										<label for="demo-priority-low">Low Priority</label>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-normal" name="demo-priority">
-										<label for="demo-priority-normal">Normal Priority</label>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-high" name="demo-priority">
-										<label for="demo-priority-high">High Priority</label>
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="checkbox" id="demo-copy" name="demo-copy">
-										<label for="demo-copy">Email me a copy of this message</label>
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="checkbox" id="demo-human" name="demo-human" checked>
-										<label for="demo-human">I am a human and not a robot</label>
-									</div>
-									<div class="col-12">
-										<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-									</div>
-									<div class="col-12">
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</div>
-								</div>
-							</form>
-						</section>
+    <script>
+      // Connections Game Logic
+      const connectionsAnswers = [
+        [0,2,8,11],    // Places I've lived: Delhi, Copenhagen, Riga, Boston
+        [1,4,7,13],    // Types of orgs: Trade Union, University, Startup, Policy Lab
+        [10,6,9,14],   // Things I'm an expert in: Salesforce, Python, Impact Measurement, Project Management
+        [3,5,12,15]    // Places I'm an alum of: Space Camp, Berkeley, Ohio State, Dutch Soccer Program
+      ];
+      const groupLabels = [
+        "Places I've lived",
+        "Types of organizations I've worked at",
+        "Things I'm an expert in",
+        "Places I'm an alum of"
+      ];
+      const boxLabels = [
+        "Delhi",           // 0
+        "Trade Union",     // 1
+        "Copenhagen",      // 2
+        "Space Camp",      // 3
+        "University",      // 4
+        "Berkeley",        // 5
+        "Python",          // 6
+        "Startup",         // 7
+        "Riga",            // 8
+        "Impact Measurement", // 9
+        "Salesforce",      // 10
+        "Boston",          // 11
+        "Ohio State",      // 12
+        "Policy Lab",      // 13
+        "Project Management", // 14
+        "Dutch Soccer Program" // 15
+      ];
 
-						<section>
-							<h4>Image</h4>
-							<h5>Fit</h5>
-							<div class="box alt">
-								<div class="row gtr-50 gtr-uniform">
-									<div class="col-12"><span class="image fit"><img src="images/fulls/05.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/01.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/02.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/03.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/05.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/06.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/03.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/02.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/thumbs/01.jpg" alt="" /></span></div>
-								</div>
-							</div>
-							<h5>Left &amp; Right</h5>
-							<p><span class="image left"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-							<p><span class="image right"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-						</section>
+      let boxState = Array(16).fill(null); // null, "solved", or "shake"
+      let solvedGroups = [];
+      let solvedLabels = [];
+      let selected = [];
+      let gridOrder = [...Array(16).keys()];
 
-					</section>
-				-->
+      function renderConnections() {
+        // Render solved groups at the top
+        const groupsDiv = document.getElementById('connections-groups');
+        groupsDiv.innerHTML = '';
+        solvedGroups.forEach((group, i) => {
+          const groupLabel = solvedLabels[i];
+          const labelDiv = document.createElement('div');
+          labelDiv.className = 'connections-group-label';
+          labelDiv.textContent = groupLabel;
+          groupsDiv.appendChild(labelDiv);
 
-			</div>
+          const groupDiv = document.createElement('div');
+          groupDiv.className = 'connections-group';
+          group.forEach(idx => {
+            const box = document.createElement('div');
+            box.className = 'connections-box solved';
+            box.textContent = boxLabels[idx];
+            groupDiv.appendChild(box);
+          });
+          groupsDiv.appendChild(groupDiv);
+        });
 
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<!--- <li><a href="https://www.linkedin.com/in/ianmulholland/" class="icon brands fa-linkedin" target="_blank" ><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://medium.com/@ian.mulholland" class="icon brands fa-medium"><span class="label">Medium</span></a></li>
-						<li><a href="https://simonsmith.github.io/github-user-search/#/ianmulholland" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="https://dribbble.com/ianmulholland" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li> --->
-					</ul> 
-					<ul class="copyright">
-						<li>&copy; Ian Mulholland</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</footer>
+        // Render grid
+        const gridDiv = document.getElementById('connections-grid');
+        gridDiv.innerHTML = '';
+        gridOrder.forEach(idx => {
+          if (solvedGroups.some(g => g.includes(idx))) return; // skip solved
+          const box = document.createElement('div');
+          box.className = 'connections-box';
+          if (selected.includes(idx)) box.classList.add('selected');
+          if (boxState[idx] === 'shake') box.classList.add('shake');
+          box.textContent = boxLabels[idx];
+          box.onclick = () => selectBox(idx);
+          gridDiv.appendChild(box);
+        });
+      }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+      function selectBox(idx) {
+        if (solvedGroups.some(g => g.includes(idx))) return;
+        if (selected.includes(idx)) {
+          selected = selected.filter(i => i !== idx);
+        } else {
+          if (selected.length < 4) selected.push(idx);
+        }
+        renderConnections();
+        if (selected.length === 4) {
+          setTimeout(checkSelection, 300);
+        }
+      }
 
-	</body>
+      function checkSelection() {
+        // Check if selected is a correct group
+        let found = false;
+        for (let i = 0; i < connectionsAnswers.length; i++) {
+          const group = connectionsAnswers[i];
+          if (group.every(idx => selected.includes(idx)) && selected.every(idx => group.includes(idx))) {
+            solvedGroups.push([...group]);
+            solvedLabels.push(groupLabels[i]);
+            // Remove solved from gridOrder
+            gridOrder = gridOrder.filter(idx => !group.includes(idx));
+            selected = [];
+            showMessage(`Nice! You found a group: ${groupLabels[i]}`);
+            renderConnections();
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          // Shake selected boxes
+          selected.forEach(idx => boxState[idx] = 'shake');
+          renderConnections();
+          setTimeout(() => {
+            selected.forEach(idx => boxState[idx] = null);
+            selected = [];
+            renderConnections();
+          }, 500);
+          showMessage("Try again!");
+        }
+        // If all solved
+        if (solvedGroups.length === connectionsAnswers.length) {
+          showMessage("You solved them all! 🎉");
+        }
+      }
+
+      function showMessage(msg) {
+        document.getElementById('connections-message').textContent = msg;
+      }
+
+      // Initial render
+      renderConnections();
+    </script>
+
+    <script>
+    // "I am..." ticker logic
+    const iamRoles = [
+      "a Proud (East) Bostonian. 🏠",
+      "an aspiring Bake Off contestant. 🎂",
+      "a cat dad. 🐈",
+      "a husband. 💍",
+      "a mint-chocolate chip lover. 🍦",
+      "a Buckeye. 🏈",
+      "a mediocre cook. 🧑‍🍳",
+      "a year-round iced coffee drinker. 🧊☕",
+      "a terrible parallel parker. 🚗",
+      "an alarm clock snoozer. 😴",
+      "a baseball card collector. ⚾",
+      "a Diet Coke addict. 🥤",
+      "a Space Camp Alum. 🚀",
+      "a recovering sneakerhead. 👟",
+      "terrified of flying. ✈️"
+    ];
+
+    const iamRole = document.getElementById('iam-role');
+    const longestRole = iamRoles.reduce((a, b) => a.length > b.length ? a : b, "");
+    iamRole.style.minWidth = `${longestRole.length + 1}ch`;
+    iamRole.textContent = "";
+
+    let iamIndex = 0, charIndex = 0, typing = true;
+    function typeRole() {
+      const currentRole = iamRoles[iamIndex];
+      if (typing) {
+        if (charIndex <= currentRole.length) {
+          iamRole.textContent = currentRole.slice(0, charIndex);
+          charIndex++;
+          setTimeout(typeRole, 60);
+        } else {
+          typing = false;
+          setTimeout(typeRole, 900);
+        }
+      } else {
+        if (charIndex >= 0) {
+          iamRole.textContent = currentRole.slice(0, charIndex);
+          charIndex--;
+          setTimeout(typeRole, 30);
+        } else {
+          typing = true;
+          iamIndex = (iamIndex + 1) % iamRoles.length;
+          setTimeout(typeRole, 300);
+        }
+      }
+    }
+    typeRole();
+    </script>
+
+    </body>
 </html>
