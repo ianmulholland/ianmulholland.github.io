@@ -205,6 +205,58 @@
           background: #f8f7f2;
           pointer-events: none;
         }
+        /* ---- Skills Heatmap ---- */
+.heatmap-card{
+  max-width: 920px; margin: 1.75em auto 0; padding: 1.25em 1.25em 1em;
+  background:#fff; border:1.5px solid #e0e7ef; border-radius:18px; box-shadow:0 4px 24px #0001;
+}
+.heatmap-title{font-size:1.2rem;font-weight:700;color:#49bf9d;margin:0 0 .75em;letter-spacing:.5px}
+.heatmap-wrap{position:relative}
+.heatmap-tooltip{
+  position:absolute; pointer-events:none; opacity:0; transform:translate(-50%,-120%);
+  background:#232323; color:#fff; font-size:.9rem; padding:.35em .55em; border-radius:6px; white-space:nowrap;
+  box-shadow:0 6px 18px #0003; transition:opacity .12s ease;
+}
+.heatmap-legend{
+  display:flex; align-items:center; gap:.6em; margin:.9em 0 .1em;
+  font-size:.95rem;color:#787878; justify-content:flex-end
+}
+.legend-bar{
+  width:180px; height:10px; border-radius:6px; border:1px solid #e0e7ef;
+  background:linear-gradient(90deg,#e8f7f2,#b6e7d7,#7fd3ba,#49bf9d);
+}
+@media (max-width: 640px){
+  .legend-bar{width:130px}
+}
+/* Keep box size; make text smaller & wrap cleanly */
+.connections-box,
+.connections-group .connections-box{
+  /* shrink text only */
+  font-size: clamp(0.72rem, 1.2vw, 0.88rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+
+  /* wrap on words, hyphenate if needed, avoid mid-letter breaks */
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+
+  /* keep the original box size */
+  width: 120px;
+  height: 70px;
+
+  /* a touch less padding gives text more room */
+  padding: 0.4em 0.5em;
+}
+
+/* Optional: a bit smaller on narrow screens */
+@media (max-width: 600px){
+  .connections-box,
+  .connections-group .connections-box{
+    font-size: clamp(0.68rem, 2.2vw, 0.84rem);
+  }
+}
         </style>
     </head>
     <body class="is-preload">
@@ -270,7 +322,20 @@
                             I received a graduate certificate in <a href="https://www.ischool.berkeley.edu/programs/ictd" target="_blank">Information and Communication Technology for Development (ICTD)</a> 
                             and I am an inaugral member of the <a href="https://developmentengineering.berkeley.edu/programs/dtod/about/" target="_blank">Digital Transformation of Development (DToD) Fellowship</a>, an NSF Research Traineeship (NRT) Program. 
                             I am also proud graduate from The Ohio State University with degrees in International Development, Economics, and French.
-                        </p>
+                        
+                          </p>
+                          <div id="skills-heatmap" class="heatmap-card">
+                    <div class="heatmap-title">Where I’ve Worked × What I Do</div>
+                    <div class="heatmap-wrap">
+                      <svg id="skills-heatmap-svg" role="img" aria-label="Heatmap of skills by industry"></svg>
+                      <div class="heatmap-tooltip" id="heatmap-tip"></div>
+                    </div>
+                    <div class="heatmap-legend">
+                      <span>Lower Expertise</span><div class="legend-bar"></div><span>Higher Expertise</span>
+                    </div>
+                    <div style="font-size:.9rem;color:#9a9a9a;margin-top:.25em;">
+                    </div>
+                  </div>
                     </section>
 
                 <!-- Connections Game Widget -->
@@ -293,9 +358,12 @@
                     <img src="app-logo.png" alt="SELF Peer Review App Logo" class="project-img">
                     SELF Peer Review App
                   </div>
-                  <div class="project-box" onclick="window.open('https://tissues.softr.app/', '_blank')">
+                  <div class="project-box"
+                      style="position: relative; z-index: 1;"
+                      onclick="try{ window.open('https://developer.self.surgery','_blank'); }
+                                catch(e){ location.href='https://developer.self.surgery'; }">
                     <img src="tissues.png" alt="Tissues Database Logo" class="project-img">
-                    Tissues Database
+                    SELF DeveloperHub
                   </div>
                   <div class="project-box" onclick="window.open('https://www.maine-atlas.com/', '_blank')">
                     <img src="atlas-logo.png" alt="Atlas Logo" class="project-img">
@@ -562,6 +630,162 @@
     }
     typeRole();
     </script>
+
+    <script>
+(function(){
+  // Data from your refined mapping
+// New order (rows) and combined/added columns
+const industries = [
+  "Entrepreneurship / Innovation",
+  "Workforce Development",
+  "Public Policy",
+  "Public Health"
+];
+
+const skills = [
+  "Product Management",
+  "Program Management",
+  "Data Science & Analysis",
+  "Impact Evaluation"
+];
+
+// 0–5 scale matrix (rows = industries, cols = skills)
+const M = [
+  //  PM,  Prog Mgmt,  DS+Analysis,  Impact
+  [   4,      5,          4,          4 ], // Entrepreneurship/Innovation (MIT Solve, 200MA, SEWA)
+  [   4,      5,          3,          3 ], // Workforce Development (Emerging Talent, 200MA, Atlas, Catalyze, Conexión)
+  [   1,      4,          4,          2 ], // Public Policy (Possibility Lab, Housing Collective)
+  [   4,      3,          2,          1 ]  // Public Health (Possibility Lab, SELF)
+];
+
+  // ---- Layout
+  const svg = document.getElementById('skills-heatmap-svg');
+  const tip = document.getElementById('heatmap-tip');
+
+  function render(){
+    const W = Math.min(920, document.getElementById('skills-heatmap').clientWidth - 20);
+    const cellW = Math.max(84, Math.floor((W - 220) / skills.length));  // grid width per cell
+    const cellH = 48;                                                    // grid height per cell
+    const leftPad = 180, topPad = 40, rightPad = 20, bottomPad = 50;
+    const width = leftPad + skills.length*cellW + rightPad;
+    const height = topPad + industries.length*cellH + bottomPad;
+
+    svg.setAttribute('width', width);
+    svg.setAttribute('height', height);
+    svg.innerHTML = ''; // clear
+
+    // Title for screen readers
+    const title = document.createElementNS('http://www.w3.org/2000/svg','title');
+    title.textContent = 'Skills by Industry Heatmap';
+    svg.appendChild(title);
+
+    // ---- Helpers
+    const min=0, max=5;
+    function lerp(a,b,t){return a+(b-a)*t}
+    // Teal ramp (#e8f7f2 -> #49bf9d)
+    function color(v){
+      const t = (v - min) / (max - min);
+      const c1=[232,247,242], c2=[73,191,157];
+      const r=Math.round(lerp(c1[0],c2[0],t));
+      const g=Math.round(lerp(c1[1],c2[1],t));
+      const b=Math.round(lerp(c1[2],c2[2],t));
+      return `rgb(${r},${g},${b})`;
+    }
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    svg.appendChild(g);
+
+    // ---- Axes labels
+    // X labels (skills)
+    skills.forEach((s, j)=>{
+      const x = leftPad + j*cellW + cellW/2;
+      const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x', x);
+      txt.setAttribute('y', topPad - 12);
+      txt.setAttribute('text-anchor','middle');
+      txt.setAttribute('fill','#787878');
+      txt.setAttribute('font-size','12');
+      txt.textContent = s;
+      g.appendChild(txt);
+    });
+
+    // Y labels (industries)
+    industries.forEach((s, i)=>{
+      const y = topPad + i*cellH + cellH/2 + 4;
+      const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x', leftPad - 10);
+      txt.setAttribute('y', y);
+      txt.setAttribute('text-anchor','end');
+      txt.setAttribute('fill','#787878');
+      txt.setAttribute('font-size','12');
+      txt.textContent = s;
+      g.appendChild(txt);
+    });
+
+    // Grid & cells
+    for(let i=0;i<industries.length;i++){
+      for(let j=0;j<skills.length;j++){
+        const v = M[i][j];
+        const x = leftPad + j*cellW;
+        const y = topPad + i*cellH;
+
+        // background cell
+        const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+        rect.setAttribute('x', x);
+        rect.setAttribute('y', y);
+        rect.setAttribute('rx', 8);
+        rect.setAttribute('ry', 8);
+        rect.setAttribute('width', cellW-8);
+        rect.setAttribute('height', cellH-8);
+        rect.setAttribute('fill', color(v));
+        rect.setAttribute('stroke', '#e0e7ef');
+        rect.setAttribute('stroke-width', '1');
+        rect.style.cursor = 'default';
+
+        // hover tooltip
+        rect.addEventListener('mousemove', (e)=>{
+          tip.style.opacity = 1;
+          tip.style.left = e.offsetX + 'px';
+          tip.style.top  = e.offsetY + 'px';
+          tip.innerHTML = `<strong>${industries[i]}</strong><br>${skills[j]}: <strong>${v}</strong> / 5`;
+        });
+        rect.addEventListener('mouseleave', ()=>{
+          tip.style.opacity = 0;
+        });
+
+        g.appendChild(rect);
+
+        // numeric value
+        const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+        t.setAttribute('x', x + (cellW-8)/2);
+        t.setAttribute('y', y + (cellH-8)/2 + 5);
+        t.setAttribute('text-anchor','middle');
+        t.setAttribute('font-weight','700');
+        t.setAttribute('font-size','13');
+        t.setAttribute('fill','#1f3a33');
+        t.textContent = v;
+        g.appendChild(t);
+      }
+    }
+
+    // subtle frame
+    const border = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    border.setAttribute('x', leftPad-8);
+    border.setAttribute('y', topPad-8);
+    border.setAttribute('width', skills.length*cellW + 16 - 8);
+    border.setAttribute('height', industries.length*cellH + 16 - 8);
+    border.setAttribute('rx', 12);
+    border.setAttribute('ry', 12);
+    border.setAttribute('fill', 'none');
+    border.setAttribute('stroke', '#ff9800');
+    border.setAttribute('stroke-width', '1.5');
+    g.appendChild(border);
+  }
+
+  render();
+  window.addEventListener('resize', () => { render(); });
+})();
+</script>
 
     </body>
 </html>
