@@ -192,6 +192,50 @@
 			cursor: pointer;
 			user-select: none;
 		}
+        .project-grid > .project-box:only-child {
+          grid-column: 1 / -1;
+        }
+        .project-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 4.5rem;
+          color: #49bf9d;
+        }
+        .project-role {
+          font-size: 0.85rem;
+          font-weight: 400;
+          color: #777;
+          margin-top: 0.2em;
+        }
+        .subsection-heading {
+          margin-top: 1.5em;
+        }
+        .portfolio-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 1.5em;
+          margin: 1em 0 2em 0;
+        }
+        .portfolio-card {
+          border: 1px solid #e5e5e5;
+          border-radius: 12px;
+          padding: 1.2em;
+        }
+        .portfolio-card h4 { margin-bottom: 0.2em; }
+        .portfolio-card p { margin-bottom: 0.5em; }
+        .placeholder { font-style: italic; opacity: 0.6; }
+        .project-box.no-link { cursor: default; }
+        .project-box.no-link:hover { transform: none; }
+        .portfolio-card h4 a { color: inherit; border-bottom: 0; }
+        .portfolio-meta {
+          font-size: 0.85rem;
+          color: #777;
+        }
+        .portfolio-outcome {
+          font-size: 0.95rem;
+          color: #49bf9d;
+        }
         .project-box:hover {
           transform: translateY(-4px) scale(1.03);
         }
@@ -376,48 +420,99 @@
                 </div>
                 </section>
 
+                <!-- 1.95 -->
+                <section id="impact-investing">
+                <h2>Impact Investing &amp; Judging</h2>
+                <p>My portfolio doesn't track financial returns. It tracks social ones.</p>
+
+                <h3 class="subsection-heading">Catalytic Investments</h3>
+                <div class="portfolio-grid">
+                  <div class="portfolio-card">
+                    <h4><a href="https://sewabharat.org/west-bengal/" target="_blank">SEWA West Bengal</a></h4>
+                    <p class="portfolio-meta">West Bengal, India</p>
+                    <p>Built a community center for local women, including weaver communities.</p>
+                    <p class="portfolio-outcome"><strong>Impact:</strong> 8,000 government scheme linkages for local women, improving wages, health, and access to finance.</p>
+                  </div>
+                  <div class="portfolio-card">
+                    <h4>Alekain Foundation</h4>
+                    <p class="portfolio-meta">Afghanistan</p>
+                    <p>Funded direct internet access for girls' education.</p>
+                    <p class="portfolio-outcome"><strong>Impact:</strong> Helped several girls gain opportunities to leave Afghanistan.</p>
+                  </div>
+                  <div class="portfolio-card">
+                    <h4>Thaki</h4>
+                    <p class="portfolio-meta">Palestine</p>
+                    <p>Provided laptops for students in Palestine.</p>
+                    <!-- PLACEHOLDER: replace with Thaki outcome before publishing -->
+                    <p class="portfolio-outcome placeholder"><strong>Impact:</strong> [Placeholder: number of laptops / students reached]</p>
+                  </div>
+                </div>
+
+                <h3 class="subsection-heading">Judging</h3>
+                <div class="project-grid">
+                  <div class="project-box" onclick="window.open('https://snakebiteprize.challenges.org/', '_blank')">
+                    <img src="snakebite-prize-logo.png" alt="Wellcome Snakebite Innovation Prize logo" class="project-img">
+                    Wellcome Snakebite Innovation Prize
+                    <span class="project-role">Challenge Works (Nesta)</span>
+                  </div>
+                  <div class="project-box" onclick="window.open('https://www.catalyzechallenge.org/', '_blank')">
+                    <img src="Catalyze-Full_logo-blue.png" alt="Catalyze logo" class="project-img">
+                    Catalyze Challenge
+                  </div>
+                  <div class="project-box no-link">
+                    <i class="fa-solid fa-scale-balanced project-img project-icon" aria-hidden="true"></i>
+                    Opportunity Now
+                  </div>
+                  <div class="project-box" onclick="window.open('https://200millionartisans.org/', '_blank')">
+                    <img src="200millionart.jpg" alt="200 Million Artisans logo" class="project-img">
+                    Kula Innovate
+                    <span class="project-role">200 Million Artisans</span>
+                  </div>
+                </div>
+                </section>
+
                 <!-- Two -->
                     <section id="two">
                         <h2>Past Work</h2>
                         <div class="row">
                             <article class="col-6 col-12-xsmall work-item">
-                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://www.catalyzechallenge.org/" target="_blank"> <img src="stemed.jpg" alt="" /> </a>    
-                                <h3><a href="https://www.catalyzechallenge.org/" target="_blank">Strenghtening Career Pathways</a></h3>
+                                <span class="image fit"><img src="stemed.jpg" alt="" /></span>    
+                                <h3>Strenghtening Career Pathways</h3>
                                 <p>I led the design of a $17 million grant program that found solutions for students in middle and high school chart clear, fulfilling paths from classroom to career.</p>
                             </article>
                             <article class="col-6 col-12-xsmall work-item">
-                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://200millionartisans.org/" target="_blank"> <img src="indiacraft.jpg" alt="" /> </a>    
-                                <h3><a href="https://200millionartisans.org/" target="_blank">Driving Innovation in Traditional Craft</a></h3>
+                                <span class="image fit"><img src="indiacraft.jpg" alt="" /></span>    
+                                <h3>Driving Innovation in Traditional Craft</h3>
                                 <p>I created India's first innovation competition in the craft sector, Kula Innovate.</p>
                             </article>
                             <article class="col-6 col-12-xsmall work-item">
-                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://social-impact-toolkit.super.site/" target="_blank"> <img src="toolkit.jpg" alt="" /> </a>    
-                                <h3><a href="https://social-impact-toolkit.super.site/" target="_blank">Technology for Social Impact Toolkit</a></h3>
+                                <span class="image fit"><img src="toolkit.jpg" alt="" /></span>    
+                                <h3>Technology for Social Impact Toolkit</h3>
                                 <p>An open source resource for anyone working in technology and social impact.</p>
                             </article>
                             <article class="col-6 col-12-xsmall work-item">
-                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/accelerating-indigenous-activism-in-peru-11708ed94606" target="_blank"> <img src="ind-peru.jpg" alt="" /> </a>    
-                                <h3><a href="https://medium.com/@ian.mulholland/accelerating-indigenous-activism-in-peru-11708ed94606" target="_blank">Accelerating Indigenous Advocacy in Peru</a></h3>
+                                <span class="image fit"><img src="ind-peru.jpg" alt="" /></span>    
+                                <h3>Accelerating Indigenous Advocacy in Peru</h3>
                                 <p>I built the initial design and community-organizing strategy for a start-up in Peru supporting Indigenous advocacy.</p>
                             </article>
                             <article class="col-6 col-12-xsmall work-item">
-                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/improving-the-cybersecurity-of-human-rights-76b409d1d3bb" target="_blank"> <img src="syria.jpg" alt="" /> </a>    
-                                <h3><a href="https://medium.com/@ian.mulholland/improving-the-cybersecurity-of-human-rights-76b409d1d3bb" target="_blank">Improving Cybersecurity for a Human Rights Archive</a></h3>
+                                <span class="image fit"><img src="syria.jpg" alt="" /></span>    
+                                <h3>Improving Cybersecurity for a Human Rights Archive</h3>
                                 <p>I worked with a human rights digital archive working in several conflict regions, including Syria, Yemen, and Sudan to build a strong cybersecurity infrastructure against attacks.</p>
                             </article>
                             <article class="col-6 col-12-xsmall work-item">
-                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/community-led-impact-and-evaluation-in-india-f52c6f2ad364" target="_blank"> <img src="sewa.jpg" alt="" /> </a>    
-                                <h3><a href="https://medium.com/@ian.mulholland/community-led-impact-and-evaluation-in-india-f52c6f2ad364" target="_blank">Community-led Impact and Evaluation in India</a></h3>
+                                <span class="image fit"><img src="sewa.jpg" alt="" /></span>    
+                                <h3>Community-led Impact and Evaluation in India</h3>
                                 <p>I worked with community organizers in India to develop an inferential impact measurement tool.</p>
                             </article>
                             <article class="col-6 col-12-xsmall work-item">
-                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/combatting-homelessness-through-data-3cdcf2140467" target="_blank"> <img src="housing.jpg" alt="" /> </a>    
-                                <h3><a href="https://medium.com/@ian.mulholland/combatting-homelessness-through-data-3cdcf2140467" target="_blank">Combatting Homelessness Through Data Driven Policy</a></h3>
+                                <span class="image fit"><img src="housing.jpg" alt="" /></span>    
+                                <h3>Combatting Homelessness Through Data Driven Policy</h3>
                                 <p>I created a tool that supported housing collective advocacy efforts to reduce homelessness.</p>
                             </article>
                             <article class="col-6 col-12-xsmall work-item">
-                                <a href="images/fulls/01.jpg" class="image fit thumb"><a href = "https://medium.com/@ian.mulholland/democratizing-resources-for-impact-entrepreneurs-6408f7e01df7" target="_blank"> <img src="partnership.jpg" alt="" /> </a>    
-                                <h3><a href="https://medium.com/@ian.mulholland/democratizing-resources-for-impact-entrepreneurs-6408f7e01df7" target="_blank">Democratizing Resources for Impact Entrepreneurs</a></h3>
+                                <span class="image fit"><img src="partnership.jpg" alt="" /></span>    
+                                <h3>Democratizing Resources for Impact Entrepreneurs</h3>
                                 <p>I developed recommender tools to improve partnership making between donors and social impact entrepreneurs.</p>
                             </article>
                         </div>
