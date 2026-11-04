@@ -305,6 +305,14 @@
     font-size: clamp(0.68rem, 2.2vw, 0.84rem);
   }
 }
+        /* Job search page link */
+        #one .actions { flex-wrap: wrap; gap: .75em; margin-left: 0; }
+        #one .actions li { padding: 0; }
+        #one .job-search-button { border-color: #49bf9d; }
+        @media (max-width: 480px) {
+          #one .actions li { width: 100%; }
+          #one .actions .button { width: 100%; padding: 0 .75em; }
+        }
         </style>
     </head>
     <body class="is-preload">
@@ -354,6 +362,7 @@
                         </div>
                         <ul class="actions">
                             <li><a href="RESUME-index.html" target="_blank" class="button">Here's my Resume</a></li>
+                            <li><a href="help-ian-find-a-job.html" class="button job-search-button">Help Ian find a job</a></li>
                         </ul>
                     </section>
 
