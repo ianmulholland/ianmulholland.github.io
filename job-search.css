@@ -37,6 +37,8 @@ p, h1, h2, h3 { margin: 0; }
 .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
 h1 { font: 600 clamp(58px, 6.9vw, 92px)/1.02 'Space Grotesk', Arial, sans-serif; letter-spacing: -4px; margin-top: 20px; }
 h1 span { color: var(--coral); }
+.hero-description { color: var(--ink); font-size: 19px; line-height: 1.55; max-width: 550px; margin-top: 22px; }
+.hero-description + .intro { margin-top: 14px; }
 .intro { color: var(--muted); max-width: 550px; margin-top: 23px; font-size: 15px; }
 .actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 26px; }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; padding: 12px 17px; min-height: 46px; border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 7px; font-size: 12px; font-weight: 600; line-height: 1.5; transition: background .15s, border-color .15s; }
