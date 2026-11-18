@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A partnership recommender for social entrepreneurs — Ian Mulholland</title>
+  <meta name="description" content="Developing a recommender to help an impact investor and incubator match social entrepreneurs with funding, mentors, and other support.">
+  <link rel="icon" href="avatar.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="case-study.css?v=more-cases-1">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to case study</a>
+  <header class="site-nav wrap">
+    <a class="name" href="https://ianmulholland.github.io/">Ian Mulholland<span class="name-dot" aria-hidden="true">.</span></a>
+    <a class="back-link" href="index.html#two"><span aria-hidden="true">↖</span> Back to past work</a>
+  </header>
+  <main id="main">
+    <article>
+      <section class="hero wrap" aria-labelledby="case-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Data analysis and impact measurement</p>
+          <h1 id="case-title">A partnership recommender for social entrepreneurs</h1>
+          <p class="dek">I developed a recommender to help an impact investor and incubator decide what support to offer the social entrepreneurs in its programs.</p>
+          <p class="hero-takeaway">It used five years of program and partnership data to suggest funding, mentorship, workshops, and other support.</p>
+          <a class="jump-link" href="#model">How the model worked <span aria-hidden="true">↓</span></a>
+        </div>
+        <figure class="case-visual recommender-visual" aria-labelledby="model-summary-caption">
+          <p class="artifact-label">Model overview</p>
+          <div class="model-stage"><span class="visual-step">Input</span><h3>Five years of program data</h3><p>Social entrepreneurs’ needs, partner expertise, and previous support</p></div>
+          <div class="model-connector" aria-hidden="true">↓</div>
+          <div class="model-stage"><span class="visual-step">Method</span><h3>Find similar organizations</h3><p>Collaborative filtering using a nearest-neighbor model</p></div>
+          <div class="model-connector" aria-hidden="true">↓</div>
+          <div class="model-stage model-output"><span class="visual-step">Output</span><h3>Suggested types of support</h3><ul><li>Funding</li><li>Mentorship</li><li>Workshops</li><li>Other programming</li></ul></div>
+          <figcaption id="model-summary-caption">A summary of the model’s approach.</figcaption>
+        </figure>
+      </section>
+
+      <dl class="project-facts wrap">
+        <div><dt>My role</dt><dd>Developing the recommender model</dd></div>
+        <div><dt>Data</dt><dd>Five years of programming, partnerships, and organization profiles</dd></div>
+        <div><dt>Use</dt><dd>Used by the organization; details of its use and results aren’t available</dd></div>
+      </dl>
+
+      <section class="story-section wrap" aria-labelledby="background-title">
+        <div class="section-marker"><span>Background</span></div>
+        <div class="story-content">
+          <h2 id="background-title">Matching support to an organization’s needs</h2>
+          <p>The organization worked as an impact investor, incubator, and accelerator. It offered funding, direct investment, connections to mentors, and workshops.</p>
+          <p>I built a tool to help identify which kinds of support might be useful for each social entrepreneur, using information from the organization’s previous programs and partnerships.</p>
+        </div>
+      </section>
+
+      <section class="decision-section" id="model" aria-labelledby="model-title">
+        <div class="wrap">
+          <div class="section-marker"><span>Method</span></div>
+          <h2 id="model-title">Using past partnerships to make recommendations</h2>
+          <p class="decision-intro">I used collaborative filtering with a K-nearest-neighbors model. It compared organizations using their needs and characteristics, the support offered, and the expertise of their partners.</p>
+          <dl class="method-list">
+            <div><dt>Organization profiles</dt><dd>The type of work, background, and needs of the social entrepreneurs</dd></div>
+            <div><dt>Programs and partners</dt><dd>The type and size of the support offered, and the partners’ expertise</dd></div>
+            <div><dt>Recorded outcomes</dt><dd>Whether a previous partnership had been described as transformational for the organization</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="story-section wrap" aria-labelledby="evaluation-title">
+        <div class="section-marker"><span>Evaluation</span></div>
+        <div class="story-content">
+          <h2 id="evaluation-title">Defining a successful partnership</h2>
+          <p>The model relied on a label for whether a partnership had been transformational. Looking back, I questioned whether that was a useful target, especially when the effects of an investment or partnership might take years to become clear.</p>
+          <p>I would spend more time defining the outcome before building the model: what progress should look like, when it could reasonably be measured, and what the available data could tell us.</p>
+          <h3 class="subheading">Combinations of support</h3>
+          <p>The model recommended individual types of programming. Another question was whether a combination of support would be more useful—for example, how mentorship and funding worked together.</p>
+          <p>After this project, I began working with multi-armed bandit methods and considered whether that approach could be useful here. It was a possible direction for further work, not part of the recommender I delivered.</p>
+        </div>
+      </section>
+
+      <section class="outcome-section wrap" aria-labelledby="outcome-title">
+        <div class="outcome-heading"><p class="eyebrow">Outcome</p><h2 id="outcome-title">A recommender used by the organization</h2></div>
+        <div class="outcome-copy"><p>The organization used the tool. I don’t have details of how it was used or evidence of its effect on partnership decisions, so I can describe the model and its limitations but can’t quantify its impact.</p></div>
+      </section>
+    </article>
+  </main>
+  <footer class="wrap footer"><a href="index.html#two">← More past work</a><span>Ian Mulholland · Data analysis & impact measurement</span></footer>
+</body>
+</html>
