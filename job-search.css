@@ -111,6 +111,16 @@ blockquote { font-size: 14px; line-height: 1.9; color: var(--muted); margin: 14p
     .application-grid { grid-template-columns: 1fr; gap: 14px; }
     .application-group { padding: 22px 22px 13px; }
 }
+.case-study-heading { font: 500 22px/1.4 'Space Grotesk', Arial, sans-serif; letter-spacing: -.5px; margin: 29px 0 16px; }
+.case-study-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.case-study-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); border-radius: 12px; padding: 24px; background: var(--card); }
+.case-study-card .small-label { font-size: 11px; letter-spacing: .3px; }
+.case-study-card h4 { font: 500 20px/1.4 'Space Grotesk', Arial, sans-serif; letter-spacing: -.5px; margin: 13px 0; }
+.case-study-card h4 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.case-study-description { color: var(--muted); font-size: 13px; line-height: 1.8; flex-grow: 1; }
+.case-study-card .text-link { align-self: flex-start; font-size: 11px; margin-top: 20px; padding-block: 8px; }
+.work-links { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 22px; }
+@media (max-width: 850px) { .case-study-grid { grid-template-columns: 1fr; } .case-study-card { padding: 23px; } }
 @media (prefers-color-scheme: dark) {
     :root { --paper: #1c2432; --ink: #eef2fd; --muted: #bfcde2; --line: #4a5b74; --blue: #a5c5ff; --blue-ink: #192f53; --coral: #ffab91; --soft: #283951; --card: #222e40; --card-hover: #2a3d58; --focus: #a5c5ff; }
 }
